@@ -200,8 +200,8 @@ describe('parse', function() {
   describe('bignumber', function () {
 
     it('should parse bignumbers', function() {
-      assert.deepEqual(parseAndEval('bignumber(0.1)'), math.bignumber(0.1));
-      assert.deepEqual(parseAndEval('bignumber("1.2e500")'), math.bignumber('1.2e500'));
+      assert.deepEqual(parseAndEval('bignumber(0.1)').val(), math.bignumber(0.1).val());
+      assert.deepEqual(parseAndEval('bignumber("1.2e500")').val(), math.bignumber('1.2e500').val());
     });
 
     it('should output bignumbers if default number type is bignumber', function() {
@@ -209,8 +209,8 @@ describe('parse', function() {
         number: 'bignumber'
       });
 
-      assert.deepEqual(parse('0.1').compile(bigmath).eval(), bigmath.bignumber(0.1));
-      assert.deepEqual(parse('1.2e5000').compile(bigmath).eval(), bigmath.bignumber('1.2e5000'));
+      assert.deepEqual(parse('0.1').compile(bigmath).eval().val(), bigmath.bignumber(0.1).val());
+      assert.deepEqual(parse('1.2e5000').compile(bigmath).eval().val(), bigmath.bignumber('1.2e5000').val());
     });
 
   });
@@ -1163,7 +1163,7 @@ describe('parse', function() {
         assert.equal(parseAndEval('3!+2'), 8);
         assert.equal(parseAndEval('(3!)+2'), 8);
         assert.equal(parseAndEval('+4!'), 24);
-        
+
         assert.equal(parseAndEval('~4!+1'), -24);
         assert.equal(parseAndEval('~(4!)+1'), -24);
 
@@ -1350,17 +1350,17 @@ describe('parse', function() {
     var BigNumber = bigmath.type.BigNumber;
 
     it('should parse numbers as bignumber', function() {
-      assert.deepEqual(bigmath.bignumber('2.3'), new BigNumber('2.3'));
-      assert.deepEqual(bigmath.eval('2.3'), new BigNumber('2.3'));
-      assert.deepEqual(bigmath.eval('2.3e+500'), new BigNumber('2.3e+500'));
+      assert.deepEqual(bigmath.bignumber('2.3').val(), new BigNumber('2.3').val());
+      assert.deepEqual(bigmath.eval('2.3').val(), new BigNumber('2.3').val());
+      assert.deepEqual(bigmath.eval('2.3e+500').val(), new BigNumber('2.3e+500').val());
     });
 
     it('should evaluate functions supporting bignumbers', function() {
-      assert.deepEqual(bigmath.eval('0.1 + 0.2'), new BigNumber('0.3'));
+      assert.deepEqual(bigmath.eval('0.1 + 0.2').val(), new BigNumber('0.3').val());
     });
 
     it('should evaluate functions supporting bignumbers', function() {
-      assert.deepEqual(bigmath.eval('add(0.1, 0.2)'), new BigNumber('0.3'));
+      assert.deepEqual(bigmath.eval('add(0.1, 0.2)').val(), new BigNumber('0.3').val());
     });
 
     it('should work with mixed numbers and bignumbers', function() {

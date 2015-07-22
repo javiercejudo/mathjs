@@ -66,7 +66,7 @@ describe('ConstantNode', function() {
 
   it ('should compile a ConstantNode with bigmath', function () {
     var expr = new ConstantNode('2.3', 'number').compile(bigmath);
-    assert.deepEqual(expr.eval(), new bigmath.type.BigNumber(2.3));
+    assert.deepEqual(expr.eval().val(), new bigmath.type.BigNumber('2.3').val());
   });
 
   it ('should find a ConstantNode', function () {

@@ -128,10 +128,17 @@ describe('UpdateNode', function() {
     var scope = {
       a: [[0, 0], [0, 0]]
     };
-    assert.deepEqual(expr.eval(scope), [[0, 0], [bigmath.bignumber(5), 0]]);
-    assert.deepEqual(scope, {
-      a: [[0, 0], [bigmath.bignumber(5), 0]]
-    });
+
+    var exprEvalScope = expr.eval(scope);
+
+
+    assert.deepEqual(exprEvalScope[0], [0, 0]);
+    assert.deepEqual(exprEvalScope[1][0].val(), bigmath.bignumber(5).val());
+    assert.strictEqual(exprEvalScope[1][1], 0);
+
+    assert.deepEqual(scope.a[0], [0, 0]);
+    assert.deepEqual(scope.a[1][0].val(), bigmath.bignumber(5).val());
+    assert.strictEqual(scope.a[1][1], 0);
   });
 
   it ('should filter an UpdateNode', function () {

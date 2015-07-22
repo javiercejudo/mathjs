@@ -16,7 +16,7 @@ describe('Chain', function() {
         .add(4)
         .subtract(math.bignumber(2))
         .done();
-    assert.deepEqual(result, math.bignumber(5));
+    assert.deepEqual(result.val(), math.bignumber(5).val());
   });
 
   it('should chain operations with constants', function() {
